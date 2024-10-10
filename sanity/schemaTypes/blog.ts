@@ -1,3 +1,5 @@
+import { title } from "process";
+
 export default {
     name: 'blog',
     type: 'document',
@@ -17,6 +19,12 @@ export default {
             }
         },
         {
+            name: 'publishedAt',
+            type: 'datetime',
+            title: 'Published at',
+            initialValue: () => new Date().toISOString(),
+        },
+        {
             name: 'titleImage',
             type: 'image',
             title: 'Title Image'
@@ -32,7 +40,11 @@ export default {
             title: 'Content',
             of: [
                 {
-                    type: 'block'
+                    type: 'block',
+                },
+                {
+                    type: 'image',
+                    fields: [{ type: 'text', name: 'alt', title: 'Alt' }]
                 }
             ]
         },
@@ -40,6 +52,7 @@ export default {
             name: "tags",
             title: "Tags",
             type: "array",
+            // type: "tag" from tag.ts file
             of: [{
                 type: "reference", to: [{ type: "tag" }]
             }]
